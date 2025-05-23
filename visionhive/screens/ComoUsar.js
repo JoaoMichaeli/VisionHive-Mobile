@@ -1,32 +1,42 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Platform } from 'react-native';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 export default function ComoUsar({ navigation }) {
   return (
+    // Container principal que ocupa toda a tela
     <View style={styles.container}>
       <Header showMenu={false} />
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.content}>
-          <Text style={styles.titulo}>Como Usar o VisionHive</Text>
-          <View style={styles.secao}>
-            <Text style={styles.subtitulo}>Seleção de Filial</Text>
-            <Text style={styles.texto}>
-              Ao iniciar o gerenciamento, você deve selecionar a filial com a qual deseja trabalhar (1, 2 ou 3).
-              Esta seleção determina quais motos serão exibidas e gerenciadas.
-            </Text>
-          </View>
-          <View style={styles.secao}>
-            <Text style={styles.subtitulo}>Gerenciar Pátio</Text>
-            <Text style={styles.texto}>
-              Na tela principal, você pode acessar as seguintes funcionalidades:
-            </Text>
-            <Text style={styles.topico}>• Cadastrar Moto: Adicione novas motos ao sistema</Text>
-            <Text style={styles.topico}>• Mover Moto: Altere a localização de uma moto existente</Text>
-            <Text style={styles.topico}>• Voltar pra Rua: Remova uma moto do estoque</Text>
-          </View>
-          <View style={styles.secao}>
+
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={true}
+        persistentScrollbar={true}
+      >
+        <Text style={styles.titulo}>Como Usar o VisionHive</Text>
+
+        {/* Seções de conteúdo */}
+        <View style={styles.secao}>
+          <Text style={styles.subtitulo}>Seleção de Filial</Text>
+          <Text style={styles.texto}>
+            Ao iniciar o gerenciamento, você deve selecionar a filial com a qual deseja trabalhar (1, 2 ou 3).
+            Esta seleção determina quais motos serão exibidas e gerenciadas.
+          </Text>
+        </View>
+
+        <View style={styles.secao}>
+          <Text style={styles.subtitulo}>Gerenciar Pátio</Text>
+          <Text style={styles.texto}>
+            Na tela principal, você pode acessar as seguintes funcionalidades:
+          </Text>
+          <Text style={styles.topico}>• Cadastrar Moto: Adicione novas motos ao sistema</Text>
+          <Text style={styles.topico}>• Mover Moto: Altere a localização de uma moto existente</Text>
+          <Text style={styles.topico}>• Voltar pra Rua: Remova uma moto do estoque</Text>
+        </View>
+
+        <View style={styles.secao}>
             <Text style={styles.subtitulo}>Cadastro de Motos</Text>
             <Text style={styles.texto}>
               Ao cadastrar uma moto, você pode preencher:
@@ -38,6 +48,7 @@ export default function ComoUsar({ navigation }) {
             <Text style={styles.topico}>• Situação: Estado atual da moto (Pronta, Em revisão, etc.)</Text>
             <Text style={styles.topico}>• Local: Onde a moto está localizada (Pátio, Revisão, etc.)</Text>
           </View>
+
           <View style={styles.secao}>
             <Text style={styles.subtitulo}>Mover Moto</Text>
             <Text style={styles.texto}>
@@ -45,6 +56,7 @@ export default function ComoUsar({ navigation }) {
               O sistema confirmará a operação antes de efetuá-la.
             </Text>
           </View>
+
           <View style={styles.secao}>
             <Text style={styles.subtitulo}>Voltar pra Rua</Text>
             <Text style={styles.texto}>
@@ -52,6 +64,7 @@ export default function ComoUsar({ navigation }) {
               Apenas motos que estejam no Pátio e com situação Pronta podem voltar para rua.
             </Text>
           </View>
+
           <View style={styles.secao}>
             <Text style={styles.subtitulo}>Lista de Motos</Text>
             <Text style={styles.texto}>
@@ -59,20 +72,23 @@ export default function ComoUsar({ navigation }) {
               Use o filtro para encontrar motos específicas por chassi, placa ou motor.
             </Text>
           </View>
+
           <View style={styles.secao}>
             <Text style={styles.subtitulo}>Mapa do Pátio</Text>
             <Text style={styles.texto}>
               Visualize o layout do pátio para melhor organização das motos.
             </Text>
           </View>
-          <TouchableOpacity
-            style={styles.botao}
-            onPress={() => navigation.navigate('SelecionarFilial')}
-          >
-            <Text style={styles.botaoTexto}>Selecionar Filial</Text>
-          </TouchableOpacity>
-        </View>
+
+        {/* Botão no final */}
+        <TouchableOpacity
+          style={styles.botao}
+          onPress={() => navigation.navigate('SelecionarFilial')}
+        >
+          <Text style={styles.botaoTexto}>Selecionar Filial</Text>
+        </TouchableOpacity>
       </ScrollView>
+
       <Footer />
     </View>
   );
@@ -83,6 +99,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000',
   },
+
   scrollView: {
     flex: 1,
   },

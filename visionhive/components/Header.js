@@ -1,8 +1,11 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Header({ onMenuPress, showMenu = true, onBackPress, showBackButton = false }) {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.header}>
       {showBackButton ? (
@@ -13,7 +16,9 @@ export default function Header({ onMenuPress, showMenu = true, onBackPress, show
         <View style={styles.spacer} />
       ) : null}
 
-      <Text style={styles.title}>VisionHive</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Dashboard')} style={styles.flexTitle}>
+        <Text style={styles.title}>VisionHive</Text>
+      </TouchableOpacity>
 
       {showMenu ? (
         <TouchableOpacity onPress={onMenuPress} style={styles.menuButton}>
@@ -36,12 +41,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  flexTitle: {
+    flex: 1,
+    alignItems: 'center',
+  },
   title: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 22,
     textAlign: 'center',
-    flex: 1,
   },
   menuButton: {
     paddingLeft: 16,
